@@ -10,7 +10,7 @@ import { Todo } from 'src/models/todo.model';
 export class AppComponent {
   public mode: string = 'list';
   public todos: Todo[] = [];
-  public title: String = 'Minhas Tarefas';
+  public title: String = 'Lista de tarefas';
   public form: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -58,12 +58,17 @@ export class AppComponent {
   save() {
     const data = JSON.stringify(this.todos);
     localStorage.setItem('todos', data);
+    this.mode = 'list';
   }
 
   load() {
     const data = localStorage.getItem('todos');
-    if (data !== null){
-      this.todos =  JSON.parse(data);
+    if (data !== null) {
+      this.todos = JSON.parse(data);
     }
+  }
+
+  changeMode(mode: string) {
+    this.mode = mode;
   }
 }
